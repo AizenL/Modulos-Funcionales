@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Creacion de grupos -->
+<odoo>
+	<data>
+		<record id="openacademy_group_manager" model="res.groups">
+			<field name="name">OpenAcademy / Manager</field>
+		</record>
+		
+		<!-- Asignación de permisos -->
+		<record id="only_responsible_can_modify" model="ir.rule">
+			<field name="name">Only Responsible can modify Course</field>
+			<field name="model_id" ref="model_openacademy_course"></field>
+			<!-- No se necesita poner el primer openacademy -->
+			<!-- pero por estandar se pone para identificar todo mejor -->
+			<!-- Solo se necesita si se hace referencia a otro modulo -->
+			<field name="groups" eval="[(4, ref('openacademy.openacademy_group_manager'))]"></field>
+			<field name="perm_read" eval="0"></field>
+			<field name="perm_write" eval="1"></field>
+			<field name="perm_create" eval="0"></field>
+			<field name="perm_unlink" eval="1"></field>
+			<field name="domain_force">
+				['|', 
+				 ('responsible_id', '=', False)
+				 ('responsible_id', '=', user.id)
+				]
+			</field>
+		</record>
+
+	</data>
+</odoo>
