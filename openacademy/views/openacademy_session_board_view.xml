@@ -64,6 +64,12 @@
         </record>
 
         <menuitem
+            name="Session Dashboard" parent="base.menu_reporting_dashboard"
+            action="open_board_session"
+            sequence="1"
+            id="menu_board_session" icon="terp-graph"/>
+
+        <menuitem
             name="Session Dashboard" parent="main_openacademy_menu"
             action="open_board_session"
             sequence="1"
