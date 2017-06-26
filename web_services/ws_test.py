@@ -29,12 +29,21 @@ domanin = [('name', '=', 'Backend Odoo')]
 course_ids = call('openacademy.course', method_name, domanin)
 print "Course IDs ", course_ids
 
-method_name = 'create'
-course_id = call('openacademy.course', method_name, {'name': 'Backend1 Odoo'})
 
 # 3.create a new session
-session_id = call('openacademy.session', 'create', {
-    'name' : 'My session',
-    'course_id' : 1,
+method_name = 'create'
+
+responsible_id = call('res.partner', 'search', [('name', '=', 'OGGonzalezM')])[0]
+print "Responsible id ", responsible_id
+
+method_name = 'create'
+course_id = call('openacademy.course', method_name, {'name': 'Getting upper ne', 'responsible_id':3})
+
+model = 'openacademy.session'
+session_id = call(model, method_name, {
+    'name' : 'From WS',
+    'instructor_id': responsible_id,
+    'course_id' : course_id,
+    'attendee_ids': [(4, 39), (4, 38)]
 })
-print "New session id ", session_id 
+print "New session id ", session_id
